@@ -179,3 +179,11 @@ static func get_texel_density(mesh : Mesh) -> float:
 	var world_length := data_tool.get_vertex(v1).distance_to(data_tool.get_vertex(v2))
 	var texture_length := data_tool.get_vertex_uv(v1).distance_to(data_tool.get_vertex_uv(v2))
 	return world_length / texture_length
+
+
+static func isolate_surface(mesh : Mesh, surface : int) -> Mesh:
+	var data_tool := MeshDataTool.new()
+	data_tool.create_from_surface(mesh, surface)
+	var new_mesh := ArrayMesh.new()
+	data_tool.commit_to_surface(new_mesh)
+	return new_mesh
